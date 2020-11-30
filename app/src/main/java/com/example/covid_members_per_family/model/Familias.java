@@ -6,8 +6,8 @@ public class Familias implements Serializable {
 
     private Long id;
     private String sobrenome;
-    private int numFamiliares;
-    private int numInfectados;
+    private String numFamiliares;
+    private String numInfectados;
 
     @Override
     public String toString() {
@@ -30,19 +30,19 @@ public class Familias implements Serializable {
         this.sobrenome = sobrenome;
     }
 
-    public int getNumFamiliares() {
+    public String getNumFamiliares() {
         return numFamiliares;
     }
 
-    public void setNumFamiliares(int numFamiliares) {
+    public void setNumFamiliares(String numFamiliares) {
         this.numFamiliares = numFamiliares;
     }
 
-    public int getNumInfectados() {
+    public String getNumInfectados() {
         return numInfectados;
     }
 
-    public void setNumInfectados(int numInfectados) {
+    public void setNumInfectados(String numInfectados) {
         this.numInfectados = numInfectados;
     }
 }

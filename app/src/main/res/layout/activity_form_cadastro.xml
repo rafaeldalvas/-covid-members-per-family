@@ -23,27 +23,27 @@
         app:layout_constraintTop_toTopOf="parent">
 
         <EditText
-            android:id="@+id/editText_sobrenome"
+            android:id="@+id/editText_email"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:ems="10"
-            android:hint="Sobrenome"
+            android:hint="Email"
             android:inputType="textPersonName" />
 
         <EditText
-            android:id="@+id/editText_familiares"
+            android:id="@+id/editText_nome"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:ems="10"
-            android:hint="Nº de familiares"
+            android:hint="Nome"
             android:inputType="textPersonName" />
 
         <EditText
-            android:id="@+id/editText_infectados"
+            android:id="@+id/editText_bairro"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:ems="10"
-            android:hint="Nº de casos"
+            android:hint="Bairro"
             android:inputType="textPersonName" />
 
         <Button

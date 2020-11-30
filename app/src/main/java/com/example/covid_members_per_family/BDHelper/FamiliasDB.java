@@ -21,7 +21,7 @@ public class FamiliasDB extends SQLiteOpenHelper {
 
     @Override
     public void onCreate(SQLiteDatabase db) {
-        String familia = "CREATE TABLE familia(id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, sobrenome TEXT NOT NULL, numFamiliares INTEGER NOT NULL, numInfectados INTEGER NOT NULL);";
+        String familia = "CREATE TABLE familia(id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, sobrenome TEXT NOT NULL, numFamiliares TEXT NOT NULL, numInfectados TEXT NOT NULL);";
         db.execSQL(familia);
     }
 
@@ -68,8 +68,8 @@ public class FamiliasDB extends SQLiteOpenHelper {
             Familias familia = new Familias();
             familia.setId(cursor.getLong(0));
             familia.setSobrenome(cursor.getString(1));
-            familia.setNumFamiliares(cursor.getInt(2));
-            familia.setNumInfectados(cursor.getInt(3));
+            familia.setNumFamiliares(cursor.getString(2));
+            familia.setNumInfectados(cursor.getString(3));
 
            familias.add(familia);
         }

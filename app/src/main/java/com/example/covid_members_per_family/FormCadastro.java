@@ -28,9 +28,9 @@ public class FormCadastro extends AppCompatActivity {
         Intent intent = getIntent();
         editarFamilia = (Familias) intent.getSerializableExtra("familia-escolhida");
 
-        editText_sobrenome = (EditText) findViewById(R.id.editText_sobrenome);
-        editText_familiares = (EditText) findViewById(R.id.editText_familiares);
-        editText_infectados = (EditText) findViewById(R.id.editText_infectados);
+        editText_sobrenome = (EditText) findViewById(R.id.editText_email);
+        editText_familiares = (EditText) findViewById(R.id.editText_nome);
+        editText_infectados = (EditText) findViewById(R.id.editText_bairro);
 
         btn_salvar = (Button) findViewById(R.id.btn_salvar);
 
@@ -39,7 +39,6 @@ public class FormCadastro extends AppCompatActivity {
             editText_sobrenome.setText(editarFamilia.getSobrenome());
             editText_familiares.setText(editarFamilia.getNumFamiliares()+"");
             editText_infectados.setText(editarFamilia.getNumInfectados()+"");
-
             familia.setId(editarFamilia.getId());
         }else{
             btn_salvar.setText("Cadastrar");
@@ -49,8 +48,8 @@ public class FormCadastro extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 familia.setSobrenome(editText_sobrenome.getText().toString());
-                familia.setNumFamiliares(Integer.parseInt(editText_familiares.getText().toString()));
-                familia.setNumInfectados(Integer.parseInt(editText_infectados.getText().toString()));
+                familia.setNumFamiliares(editText_familiares.getText().toString());
+                familia.setNumInfectados(editText_infectados.getText().toString());
 
                 if(btn_salvar.getText().toString().equals("Cadastrar")){
                     dbHelper.salvarFamilia(familia);
