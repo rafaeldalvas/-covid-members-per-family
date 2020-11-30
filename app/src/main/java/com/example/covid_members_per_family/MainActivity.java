@@ -3,7 +3,6 @@ package com.example.covid_members_per_family;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
-import android.graphics.fonts.FontFamily;
 import android.os.Bundle;
 import android.view.ContextMenu;
 import android.view.MenuItem;
@@ -14,7 +13,7 @@ import android.widget.Button;
 import android.widget.ListView;
 
 import com.example.covid_members_per_family.BDHelper.FamiliasDB;
-import com.example.covid_members_per_family.model.Familias;
+import com.example.covid_members_per_family.model.Pessoas;
 
 import java.util.ArrayList;
 
@@ -22,8 +21,8 @@ public class MainActivity extends AppCompatActivity {
 
     ListView lista;
     FamiliasDB dbHelper;
-    ArrayList<Familias> listview_cadastros;
-    Familias familia;
+    ArrayList<Pessoas> listview_cadastros;
+    Pessoas pessoa;
     ArrayAdapter adapter;
 
     @Override
@@ -45,7 +44,7 @@ public class MainActivity extends AppCompatActivity {
         lista.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapter, View view, int position, long id) {
-                Familias familiaEscolhida = (Familias) adapter.getItemAtPosition(position);
+                Pessoas familiaEscolhida = (Pessoas) adapter.getItemAtPosition(position);
 
                 Intent i = new Intent(MainActivity.this, FormCadastro.class);
                 i.putExtra("familia-escolhida", familiaEscolhida);
@@ -56,7 +55,7 @@ public class MainActivity extends AppCompatActivity {
         lista.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
             @Override
             public boolean onItemLongClick(AdapterView<?> adapter, View view, int position, long id) {
-                familia = (Familias) adapter.getItemAtPosition(position);
+                pessoa = (Pessoas) adapter.getItemAtPosition(position);
                 return false;
             }
         });
@@ -69,9 +68,9 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public boolean onMenuItemClick(MenuItem item) {
                 dbHelper = new FamiliasDB(MainActivity.this);
-                dbHelper.deletarFamilia(familia);
+                dbHelper.deletarPessoa(pessoa);
                 dbHelper.close();
-                carregarFamilia();
+                carregarPessoa();
                 return true;
             }
         });
@@ -79,16 +78,16 @@ public class MainActivity extends AppCompatActivity {
 
     protected void onResume(){
         super.onResume();
-        carregarFamilia();
+        carregarPessoa();
     }
 
-    public void carregarFamilia(){
+    public void carregarPessoa(){
         dbHelper = new FamiliasDB(MainActivity.this);
         listview_cadastros = dbHelper.getLista();
         dbHelper.close();
 
         if (listview_cadastros != null){
-            adapter = new ArrayAdapter<Familias>(MainActivity.this, android.R.layout.simple_list_item_1, listview_cadastros);
+            adapter = new ArrayAdapter<Pessoas>(MainActivity.this, android.R.layout.simple_list_item_1, listview_cadastros);
             lista.setAdapter(adapter);
         }
     }

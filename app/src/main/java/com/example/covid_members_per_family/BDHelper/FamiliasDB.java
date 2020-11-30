@@ -6,7 +6,7 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
-import com.example.covid_members_per_family.model.Familias;
+import com.example.covid_members_per_family.model.Pessoas;
 
 import java.util.ArrayList;
 
@@ -31,48 +31,48 @@ public class FamiliasDB extends SQLiteOpenHelper {
         db.execSQL(familia);
     }
 
-    public void salvarFamilia (Familias familia){
+    public void salvarPessoa (Pessoas pessoa){
         ContentValues values = new ContentValues();
 
-        values.put("sobrenome", familia.getEmail());
-        values.put("numFamiliares", familia.getNome());
-        values.put("numInfectados", familia.getBairro());
+        values.put("sobrenome", pessoa.getEmail());
+        values.put("numFamiliares", pessoa.getNome());
+        values.put("numInfectados", pessoa.getBairro());
 
         getWritableDatabase().insert("familia",null,values);
     }
 
-    public void alterarFamilia (Familias familia){
+    public void alterarPessoa (Pessoas pessoa){
         ContentValues values = new ContentValues();
 
-        values.put("sobrenome", familia.getEmail());
-        values.put("numFamiliares", familia.getNome());
-        values.put("numInfectados", familia.getBairro());
+        values.put("sobrenome", pessoa.getEmail());
+        values.put("numFamiliares", pessoa.getNome());
+        values.put("numInfectados", pessoa.getBairro());
 
-        String [] args = {familia.getId().toString()};
+        String [] args = {pessoa.getId().toString()};
 
         getWritableDatabase().update("familia",values, "id=?",args);
     }
 
-    public void deletarFamilia (Familias familia) {
+    public void deletarPessoa (Pessoas familia) {
         String [] args = {familia.getId().toString()};
 
         getWritableDatabase().delete("familia", "id=?",args);
     }
 
-    public ArrayList<Familias> getLista(){
+    public ArrayList<Pessoas> getLista(){
         String [] columns = {"id", "sobrenome", "numFamiliares", "numInfectados"};
         Cursor cursor = getWritableDatabase().query("familia", columns, null,null,null, null, null, null);
-        ArrayList<Familias> familias = new ArrayList<Familias>();
+        ArrayList<Pessoas> pessoas = new ArrayList<Pessoas>();
 
         while (cursor.moveToNext()){
-            Familias familia = new Familias();
-            familia.setId(cursor.getLong(0));
-            familia.setEmail(cursor.getString(1));
-            familia.setNome(cursor.getString(2));
-            familia.setBairro(cursor.getString(3));
+            Pessoas pessoa = new Pessoas();
+            pessoa.setId(cursor.getLong(0));
+            pessoa.setEmail(cursor.getString(1));
+            pessoa.setNome(cursor.getString(2));
+            pessoa.setBairro(cursor.getString(3));
 
-           familias.add(familia);
+           pessoas.add(pessoa);
         }
-        return familias;
+        return pessoas;
     }
 }
