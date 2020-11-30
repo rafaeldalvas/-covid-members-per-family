@@ -22,6 +22,7 @@ public class FormCadastro extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_form_cadastro);
 
+        familia = new Familias();
         dbHelper = new FamiliasDB(FormCadastro.this);
 
         Intent intent = getIntent();
@@ -48,6 +49,9 @@ public class FormCadastro extends AppCompatActivity {
 
                 if(btn_salvar.getText().toString().equals("Cadastrar")){
                     dbHelper.salvarFamilia(familia);
+                    dbHelper.close();
+                }else{
+                    dbHelper.alterarFamilia(familia);
                     dbHelper.close();
                 }
             }

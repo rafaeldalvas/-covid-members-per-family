@@ -21,7 +21,7 @@ public class FamiliasDB extends SQLiteOpenHelper {
 
     @Override
     public void onCreate(SQLiteDatabase db) {
-        String familia = "CREATE TABLE familia(id INTERGER PRIMARY KEY AUTOINCREMENT NOT NULL, sobrenome TEXT NOT NULL, numFamiliares INTERGER NOT NULL, numInfectados INTERGER NOT NULL);";
+        String familia = "CREATE TABLE familia(id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, sobrenome TEXT NOT NULL, numFamiliares INTEGER NOT NULL, numInfectados INTEGER NOT NULL);";
         db.execSQL(familia);
     }
 
@@ -41,6 +41,24 @@ public class FamiliasDB extends SQLiteOpenHelper {
         getWritableDatabase().insert("familia",null,values);
     }
 
+    public void alterarFamilia (Familias familia){
+        ContentValues values = new ContentValues();
+
+        values.put("sobrenome", familia.getSobrenome());
+        values.put("numFamiliares", familia.getNumFamiliares());
+        values.put("numInfectados", familia.getNumInfectados());
+
+        String [] args = {familia.getId().toString()};
+
+        getWritableDatabase().update("familia",values, "id=?",args);
+    }
+
+    public void deletarFamilia (Familias familia) {
+        String [] args = {familia.getId().toString()};
+
+        getWritableDatabase().delete("familia", "id=?",args);
+    }
+
     public ArrayList<Familias> getLista(){
         String [] columns = {"id", "sobrenome", "numFamiliares", "numInfectados"};
         Cursor cursor = getWritableDatabase().query("familia", columns, null,null,null, null, null, null);
@@ -53,7 +71,7 @@ public class FamiliasDB extends SQLiteOpenHelper {
             familia.setNumFamiliares(cursor.getInt(2));
             familia.setNumInfectados(cursor.getInt(3));
 
-            familias.add(familia);
+           familias.add(familia);
         }
         return familias;
     }

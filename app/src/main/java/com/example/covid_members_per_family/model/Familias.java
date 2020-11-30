@@ -7,6 +7,11 @@ public class Familias {
     private int numFamiliares;
     private int numInfectados;
 
+    @Override
+    public String toString() {
+        return sobrenome.toString();
+    }
+
     public Long getId() {
         return id;
     }
