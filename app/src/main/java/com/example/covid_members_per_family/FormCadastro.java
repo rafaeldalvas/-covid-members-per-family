@@ -36,6 +36,11 @@ public class FormCadastro extends AppCompatActivity {
 
         if (editarFamilia != null){
             btn_salvar.setText("Modificar");
+            editText_sobrenome.setText(editarFamilia.getSobrenome());
+            editText_familiares.setText(editarFamilia.getNumFamiliares()+"");
+            editText_infectados.setText(editarFamilia.getNumInfectados()+"");
+
+            familia.setId(editarFamilia.getId());
         }else{
             btn_salvar.setText("Cadastrar");
         }

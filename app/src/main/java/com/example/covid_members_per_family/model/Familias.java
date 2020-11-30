@@ -1,6 +1,8 @@
 package com.example.covid_members_per_family.model;
 
-public class Familias {
+import java.io.Serializable;
+
+public class Familias implements Serializable {
 
     private Long id;
     private String sobrenome;
