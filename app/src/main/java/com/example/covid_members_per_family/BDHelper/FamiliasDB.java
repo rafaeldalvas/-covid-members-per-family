@@ -34,9 +34,9 @@ public class FamiliasDB extends SQLiteOpenHelper {
     public void salvarFamilia (Familias familia){
         ContentValues values = new ContentValues();
 
-        values.put("sobrenome", familia.getSobrenome());
-        values.put("numFamiliares", familia.getNumFamiliares());
-        values.put("numInfectados", familia.getNumInfectados());
+        values.put("sobrenome", familia.getEmail());
+        values.put("numFamiliares", familia.getNome());
+        values.put("numInfectados", familia.getBairro());
 
         getWritableDatabase().insert("familia",null,values);
     }
@@ -44,9 +44,9 @@ public class FamiliasDB extends SQLiteOpenHelper {
     public void alterarFamilia (Familias familia){
         ContentValues values = new ContentValues();
 
-        values.put("sobrenome", familia.getSobrenome());
-        values.put("numFamiliares", familia.getNumFamiliares());
-        values.put("numInfectados", familia.getNumInfectados());
+        values.put("sobrenome", familia.getEmail());
+        values.put("numFamiliares", familia.getNome());
+        values.put("numInfectados", familia.getBairro());
 
         String [] args = {familia.getId().toString()};
 
@@ -67,9 +67,9 @@ public class FamiliasDB extends SQLiteOpenHelper {
         while (cursor.moveToNext()){
             Familias familia = new Familias();
             familia.setId(cursor.getLong(0));
-            familia.setSobrenome(cursor.getString(1));
-            familia.setNumFamiliares(cursor.getString(2));
-            familia.setNumInfectados(cursor.getString(3));
+            familia.setEmail(cursor.getString(1));
+            familia.setNome(cursor.getString(2));
+            familia.setBairro(cursor.getString(3));
 
            familias.add(familia);
         }

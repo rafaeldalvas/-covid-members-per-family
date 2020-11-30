@@ -5,13 +5,13 @@ import java.io.Serializable;
 public class Familias implements Serializable {
 
     private Long id;
-    private String sobrenome;
-    private String numFamiliares;
-    private String numInfectados;
+    private String email;
+    private String nome;
+    private String bairro;
 
     @Override
     public String toString() {
-        return sobrenome.toString();
+        return nome.toString();
     }
 
     public Long getId() {
@@ -22,27 +22,27 @@ public class Familias implements Serializable {
         this.id = id;
     }
 
-    public String getSobrenome() {
-        return sobrenome;
+    public String getEmail() {
+        return email;
     }
 
-    public void setSobrenome(String sobrenome) {
-        this.sobrenome = sobrenome;
+    public void setEmail(String email) {
+        this.email = email;
     }
 
-    public String getNumFamiliares() {
-        return numFamiliares;
+    public String getNome() {
+        return nome;
     }
 
-    public void setNumFamiliares(String numFamiliares) {
-        this.numFamiliares = numFamiliares;
+    public void setNome(String nome) {
+        this.nome = nome;
     }
 
-    public String getNumInfectados() {
-        return numInfectados;
+    public String getBairro() {
+        return bairro;
     }
 
-    public void setNumInfectados(String numInfectados) {
-        this.numInfectados = numInfectados;
+    public void setBairro(String bairro) {
+        this.bairro = bairro;
     }
 }
