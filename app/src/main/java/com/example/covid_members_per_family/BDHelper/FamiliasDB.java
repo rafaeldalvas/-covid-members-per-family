@@ -6,7 +6,7 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
-import com.example.covid_members_per_family.model.Familias;
+import com.example.covid_members_per_family.model.Pessoas;
 
 import java.util.ArrayList;
 
@@ -31,7 +31,7 @@ public class FamiliasDB extends SQLiteOpenHelper {
         db.execSQL(familia);
     }
 
-    public void salvarFamilia (Familias familia){
+    public void salvarPessoa (Pessoas familia){
         ContentValues values = new ContentValues();
 
         values.put("sobrenome", familia.getEmail());
@@ -41,7 +41,7 @@ public class FamiliasDB extends SQLiteOpenHelper {
         getWritableDatabase().insert("familia",null,values);
     }
 
-    public void alterarFamilia (Familias familia){
+    public void editarPessoa (Pessoas familia){
         ContentValues values = new ContentValues();
 
         values.put("sobrenome", familia.getEmail());
@@ -53,19 +53,19 @@ public class FamiliasDB extends SQLiteOpenHelper {
         getWritableDatabase().update("familia",values, "id=?",args);
     }
 
-    public void deletarFamilia (Familias familia) {
+    public void deletarPessoa (Pessoas familia) {
         String [] args = {familia.getId().toString()};
 
         getWritableDatabase().delete("familia", "id=?",args);
     }
 
-    public ArrayList<Familias> getLista(){
+    public ArrayList<Pessoas> getLista(){
         String [] columns = {"id", "sobrenome", "numFamiliares", "numInfectados"};
         Cursor cursor = getWritableDatabase().query("familia", columns, null,null,null, null, null, null);
-        ArrayList<Familias> familias = new ArrayList<Familias>();
+        ArrayList<Pessoas> familias = new ArrayList<Pessoas>();
 
         while (cursor.moveToNext()){
-            Familias familia = new Familias();
+            Pessoas familia = new Pessoas();
             familia.setId(cursor.getLong(0));
             familia.setEmail(cursor.getString(1));
             familia.setNome(cursor.getString(2));

@@ -9,12 +9,12 @@ import android.widget.Button;
 import android.widget.EditText;
 
 import com.example.covid_members_per_family.BDHelper.FamiliasDB;
-import com.example.covid_members_per_family.model.Familias;
+import com.example.covid_members_per_family.model.Pessoas;
 
 public class FormCadastro extends AppCompatActivity {
     EditText editText_email, editText_nome, editText_bairro;
     Button btn_salvar;
-    Familias editarFamilia, familia;
+    Pessoas editarPessoa, pessoa;
     FamiliasDB dbHelper;
 
     @Override
@@ -22,11 +22,11 @@ public class FormCadastro extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_form_cadastro);
 
-        familia = new Familias();
+        pessoa = new Pessoas();
         dbHelper = new FamiliasDB(FormCadastro.this);
 
         Intent intent = getIntent();
-        editarFamilia = (Familias) intent.getSerializableExtra("familia-escolhida");
+        editarPessoa = (Pessoas) intent.getSerializableExtra("pessoa-escolhida");
 
         editText_email = (EditText) findViewById(R.id.editText_email);
         editText_nome = (EditText) findViewById(R.id.editText_nome);
@@ -34,12 +34,12 @@ public class FormCadastro extends AppCompatActivity {
 
         btn_salvar = (Button) findViewById(R.id.btn_salvar);
 
-        if (editarFamilia != null){
+        if (editarPessoa != null){
             btn_salvar.setText("Modificar");
-            editText_email.setText(editarFamilia.getEmail());
-            editText_nome.setText(editarFamilia.getNome()+"");
-            editText_bairro.setText(editarFamilia.getBairro()+"");
-            familia.setId(editarFamilia.getId());
+            editText_email.setText(editarPessoa.getEmail());
+            editText_nome.setText(editarPessoa.getNome()+"");
+            editText_bairro.setText(editarPessoa.getBairro()+"");
+            pessoa.setId(editarPessoa.getId());
         }else{
             btn_salvar.setText("Cadastrar");
         }
@@ -47,16 +47,20 @@ public class FormCadastro extends AppCompatActivity {
         btn_salvar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                familia.setEmail(editText_email.getText().toString());
-                familia.setNome(editText_nome.getText().toString());
-                familia.setBairro(editText_bairro.getText().toString());
+                pessoa.setEmail(editText_email.getText().toString());
+                pessoa.setNome(editText_nome.getText().toString());
+                pessoa.setBairro(editText_bairro.getText().toString());
 
                 if(btn_salvar.getText().toString().equals("Cadastrar")){
-                    dbHelper.salvarFamilia(familia);
+                    dbHelper.salvarPessoa(pessoa);
                     dbHelper.close();
+                    Intent intent = new Intent(FormCadastro.this, MainActivity.class);
+                    startActivity(intent);
                 }else{
-                    dbHelper.alterarFamilia(familia);
+                    dbHelper.editarPessoa(pessoa);
                     dbHelper.close();
+                    Intent intent = new Intent(FormCadastro.this, MainActivity.class);
+                    startActivity(intent);
                 }
             }
         });
