@@ -47,7 +47,7 @@ public class MainActivity extends AppCompatActivity {
                 Pessoas familiaEscolhida = (Pessoas) adapter.getItemAtPosition(position);
 
                 Intent i = new Intent(MainActivity.this, FormCadastro.class);
-                i.putExtra("familia-escolhida", familiaEscolhida);
+                i.putExtra("pessoa-escolhida", familiaEscolhida);
                 startActivity(i);
             }
         });

@@ -31,7 +31,9 @@ public class FamiliasDB extends SQLiteOpenHelper {
         db.execSQL(familia);
     }
 
+
     public void salvarPessoa (Pessoas pessoa){
+
         ContentValues values = new ContentValues();
 
         values.put("sobrenome", pessoa.getEmail());
@@ -70,7 +72,6 @@ public class FamiliasDB extends SQLiteOpenHelper {
             pessoa.setEmail(cursor.getString(1));
             pessoa.setNome(cursor.getString(2));
             pessoa.setBairro(cursor.getString(3));
-
            pessoas.add(pessoa);
         }
         return pessoas;

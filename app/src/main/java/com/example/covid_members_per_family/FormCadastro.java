@@ -54,9 +54,13 @@ public class FormCadastro extends AppCompatActivity {
                 if(btn_salvar.getText().toString().equals("Cadastrar")){
                     dbHelper.salvarPessoa(pessoa);
                     dbHelper.close();
+                    Intent intent = new Intent(FormCadastro.this, MainActivity.class);
+                    startActivity(intent);
                 }else{
                     dbHelper.alterarPessoa(pessoa);
                     dbHelper.close();
+                    Intent intent = new Intent(FormCadastro.this, MainActivity.class);
+                    startActivity(intent);
                 }
             }
         });
